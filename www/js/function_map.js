@@ -13,7 +13,7 @@ $( document ).on( "pagebeforeshow", "#map-screen", function() {
                 
                 localStorage.removeItem("targetLat");
                 localStorage.removeItem("targetLong");                
-                
+                $('#map_canvas').gmap('clear', 'markers');
                 // console.log(event.latLng.lng() + ' ' + );
 
                 localStorage.setItem("targetLat", event.latLng.lat());
@@ -69,12 +69,13 @@ function getCurrentLoc(){
         {
             if((convertedVal / 1000) <= 100)
             {
+                window.navigator = window.navigator || {};
+                navigator.vibrate([1000, 500, 1000, 500, 2000]);                
                 alert('you have arrived!');
+                
                 localStorage.removeItem("targetLat");
                 localStorage.removeItem("targetLong");                    
-                window.navigator = window.navigator || {};
-
-                navigator.vibrate([1000, 500, 1000, 500, 2000]);
+               
                 timer = '';
                 $('#map_canvas').gmap('clear', 'markers');
             }
