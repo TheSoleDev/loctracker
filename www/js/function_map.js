@@ -67,12 +67,12 @@ function getCurrentLoc(){
 
         if(localStorage.getItem("targetLong") != null)
         {
-            if((convertedVal / 1000) <= 100)
+            if((convertedVal / 1000) <= 1)
             {
                 window.navigator = window.navigator || {};
                 navigator.vibrate([1000, 500, 1000, 500, 2000]);                
                 alert('you have arrived!');
-                
+
                 localStorage.removeItem("targetLat");
                 localStorage.removeItem("targetLong");                    
                
