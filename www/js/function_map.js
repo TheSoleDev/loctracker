@@ -69,12 +69,14 @@ function getCurrentLoc(){
         {
             if((convertedVal / 1000) <= 100)
             {
-               alert('you have arrived!');
-                
+                alert('you have arrived!');
+                localStorage.removeItem("targetLat");
+                localStorage.removeItem("targetLong");                    
                 window.navigator = window.navigator || {};
 
                 navigator.vibrate([1000, 500, 1000, 500, 2000]);
                 timer = '';
+                $('#map_canvas').gmap('clear', 'markers');
             }
         }
         //$('#map_canvas').gmap('clear', 'markers');
