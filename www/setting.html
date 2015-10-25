@@ -19,18 +19,43 @@
     </head>
     <body>
 
-        <div data-role="page" id="map-screen">
+        <div data-role="page" id="setting-screen">
             <div data-role="header" id="applicationHeader" data-theme="b" data-position="fixed" data-id="navStay">
-              <a href="#" data-ajax="false" class="startTrack ui-btn-left ui-btn ui-btn-inline ui-mini ui-corner-all ui-btn-icon-left ui-icon-location">Start Tracking</a>
-              <a href="#" data-ajax="false" class="stopTrack ui-btn-left ui-btn ui-btn-inline ui-mini ui-corner-all ui-btn-icon-left ui-icon-delete">Stop Tracking</a>              
-               <h1 class="ui-title" role="heading" aria-level="1">WakeMeApp</h1>
-               <a href="setting.html" data-ajax="false" class=" ui-btn-right ui-btn ui-btn-inline ui-mini ui-corner-all ui-btn-icon-right ui-icon-gear">Settings</a>
+             <a href="index.html" data-ajax="false" class="showAll ui-btn-left ui-btn ui-btn-inline ui-mini ui-corner-all ui-btn-icon-left ui-icon-arrow-l">Back</a>
+               <h1 class="ui-title" role="heading" aria-level="1">Settings</h1>
 
             </div>
             <div role="main" class="" data-position="fixed">
 
-                <div id="map_canvas" class="map rounded"></div>
+            <form>
+                <ul data-role="listview" data-inset="true">
+                    <li class="ui-field-contain">
+                                <label for="txt-radius" class="select">Select Radius</label>
+                                <select name="txt-radius" id="txt-radius" >
+                                    <option value="50">50m</option>
+                                    <option value="100">100m</option>
+                                    <option value="500">500m</option>
+                                    <option value="1000">1km</option>
+                                    <option value="2000">2km</option>
+                                </select>
+                    </li>
+                    <li class="ui-field-contain">
+                                <label for="txt-vibrate" class="select">Vibrate</label>
+                                <select name="txt-vibrate" id="txt-vibrate" >
+                                    <option value="3">3 times</option>
+                                    <option value="5">5 times</option>
+                                    <option value="10">10 times</option>
+                                </select>
+                    </li>
 
+                    <li class="ui-body ui-body-b">
+                        <fieldset class="ui-grid-a">
+                        <div class="ui-block-a"><a href="index.html" data-ajax="false" class="ui-btn ui-corner-all ui-btn-a">Cancel</a></div>
+                        <div class="ui-block-b"><a href="#" data-ajax="false" class="btn-save ui-btn ui-corner-all ui-btn-a">Save</a></div>
+                        </fieldset>
+                    </li>
+                </ul>
+            </form>
             </div>
 
         </div>
@@ -47,9 +72,8 @@
         <script type="text/javascript" src="js/vendor/jquery.ui.map.js"></script>
         <script type="text/javascript" src="js/vendor/jquery.ui.map.services.js"></script>
         <script type="text/javascript" src="js/vendor/jquery.ui.map.extensions.js"></script>
-        <script type="text/javascript" src="js/function_map.js"></script>
-        <script type="text/javascript" src="js/global.js"></script>        
-        <script type="text/javascript" src="js/map.js"></script>          
+        <script type="text/javascript" src="js/setting.js"></script>
+         
         <script type="text/javascript">
 
         </script>

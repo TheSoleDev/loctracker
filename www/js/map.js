@@ -1,19 +1,52 @@
+document.addEventListener('deviceready', function () {
+    // Android customization
+    cordova.plugins.backgroundMode.setDefaults({ text:'Doing heavy tasks.'});
+    // Enable background mode
+    cordova.plugins.backgroundMode.enable();
 
-$( document ).on( "pagebeforeshow", ".pageload", function() {
-        
-    // var arr_str = [];   
+    // Called when background mode has been activated
+    cordova.plugins.backgroundMode.onactivate = function () {
+        setTimeout(function () {
+            // Modify the currently displayed notification
+            cordova.plugins.backgroundMode.configure({
+                text:'Running in background for more than 5s now.'
+            });
+        }, 5000);
+    }
+}, false);
 
-    // arr_str.push('<ul>');
-    //     arr_str.push('<li><a href="branch.html" data-ajax="false" data-icon="grid" class="ui-btn-active">Branch</a></li>');
-    //     arr_str.push('<li><a href="map.html" data-ajax="false" data-icon="star">Map</a></li>');
-    //     arr_str.push('<li><a href="#" data-icon="gear">Promos</a></li>');
-    //     arr_str.push('<li><a href="#" data-icon="star">Reservation</a></li>');
-    //     arr_str.push('<li><a href="#" data-icon="star">Fav</a></li>');
-    // arr_str.push('</ul>');
 
-    // $('#footer-nav-item').html(arr_str.join(''))).listview('refresh');
+$( document ).on( "pagebeforeshow", "#map-screen", function() {
+      
+    if(localStorage.getItem("setting-radius") === null)
+    {  
+        localStorage.setItem("setting-radius", '100'); 
+        localStorage.setItem("setting-vibrate", '5'); 
+    }
+
+    getCurrentLoc();
+    $('.stopTrack').hide();
 
 });
+
+$('#map-screen').on('click','.startTrack',function(e) { 
+
+     timer = setInterval(function(){
+                    getCurrentLoc();
+                    //console.log(localStorage.getItem("currentLong"));
+            },1000);
+
+    $('.startTrack').hide();
+    $('.stopTrack').show();
+});
+
+$('#map-screen').on('click','.stopTrack',function(e) { 
+    $('.startTrack').show();
+
+    clearInterval(timer);
+    $('.stopTrack').hide();
+});
+
 
 
 $('#map-screen').on('click','.showAll',function(e) { 

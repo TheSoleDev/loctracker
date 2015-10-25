@@ -1,9 +1,6 @@
 
 
-var timer = setInterval(function(){
-                getCurrentLoc();
-                //console.log(localStorage.getItem("currentLong"));
-        },1000);
+var timer ='';
 
 $( document ).on( "pagebeforeshow", "#map-screen", function() {
    
@@ -57,8 +54,9 @@ function getCurrentLoc(){
             localStorage.setItem("currentLong", position.coords.longitude);
 
             $('#map_canvas').gmap('addMarker', { 'position':currentLoc, 'icon':'http://egmddemo.com/marker-icon.png'} );
-            $('#map_canvas').gmap({'center': position.coords.latitude + ", " + position.coords.longitude, 'zoom': 12,'disableDefaultUI':true, });
+            $('#map_canvas').gmap({'center': position.coords.latitude + ", " + position.coords.longitude, 'zoom': 8,'disableDefaultUI':true, });
             $('#map_canvas').gmap('get','map').panTo(currentLoc);
+            $('#map_canvas').gmap('option', 'zoom', 16);
 
         });
 
@@ -67,16 +65,32 @@ function getCurrentLoc(){
 
         if(localStorage.getItem("targetLong") != null)
         {
-            if((convertedVal / 1000) <= 1)
+            if(convertedVal <= localStorage.getItem("setting-radius"))
             {
                 window.navigator = window.navigator || {};
-                navigator.vibrate([1000, 500, 1000, 500, 2000]);                
+
+                if(localStorage.getItem("setting-vibrate") == '3')
+                {
+                    navigator.vibrate([1000, 500, 1000, 500, 2000]); 
+                }                
+                else if(localStorage.getItem("setting-vibrate") == '5')
+                {
+                    navigator.vibrate([1000, 500, 1000, 500, 1000, 500, 1000, 500, 2000]); 
+                }                
+                else
+                {
+                    navigator.vibrate([1000, 500, 1000, 500, 1000, 500, 1000, 500, 1000, 500, 1000, 500, 1000, 500, 1000, 500, 1000, 500, 2000]); 
+                }
+
+                               
                 alert('you have arrived!');
 
                 localStorage.removeItem("targetLat");
                 localStorage.removeItem("targetLong");                    
                
-                timer = '';
+                $('.startTrack').show();
+                $('.stopTrack').hide();
+                clearInterval(timer);
                 $('#map_canvas').gmap('clear', 'markers');
             }
         }
