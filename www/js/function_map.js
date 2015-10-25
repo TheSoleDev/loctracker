@@ -97,6 +97,9 @@ function getCurrentLoc(){
         //$('#map_canvas').gmap('clear', 'markers');
         //$('#map_canvas').gmap({action:'clear', tag:'1'});
     } 
+    else{
+        alert('Your GPS is disable!');
+    }
 }
 
 
